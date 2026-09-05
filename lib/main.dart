@@ -68,9 +68,13 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _initPlugin() async {
     try {
+      // iOS/macOS: base app bundle id + App Group shared with XrayTunnel.
+      // The plugin appends ".XrayTunnel" to the provider id internally.
       await _flutterVless.initializeVless(
         notificationIconResourceType: 'mipmap',
         notificationIconResourceName: 'ic_launcher',
+        providerBundleIdentifier: 'com.example.vpnVless',
+        groupIdentifier: 'group.com.example.vpnVless',
       );
       if (!mounted) return;
       setState(() => _initialized = true);
